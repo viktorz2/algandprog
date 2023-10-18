@@ -364,7 +364,127 @@
             }
             return false;
           }
-     
+     3. Функция. Сортировка по количеству единиц
+          bool compare(std::string s1, std::string s2) {
+               int one_in_s1 = std::count(s1.begin(), s1.end(), '1');
+               int one_in_s2 = std::count(s2.begin(), s2.end(), '1');
+               if (one_in_s1 == one_in_s2) {
+                   return std::stoi(s1) < std::stoi(s2);
+               }
+               return one_in_s1 > one_in_s2;
+          }
+Контест 3 [https://contest.yandex.ru/contest/53504/problems/] :
+     1. Объединить отсортированные последовательности
+          #include <iostream>
+          #include <vector>
+          #include <algorithm>
+          using namespace std;
+          
+          int main()
+          {
+          	int col1, col2, col12;
+          	vector <int> str1;
+          	vector <int> str2;
+          	vector <int> str12;
+          	cin >> col1;
+          	for (int i = 0; i < col1; i++) {
+          		int n1;
+          		cin >> n1;
+          		str1.push_back(n1);
+          		str12.push_back(n1);
+          	}
+          	cin >> col2;
+          	for (int i = 0; i < col2; i++) {
+          		int n2;
+          		cin >> n2;
+          		str2.push_back(n2);
+          		str12.push_back(n2);
+          	}
+          	col12 = col1 + col2;
+          	sort(str12.begin(), str12.end());
+          	for (int i = 0; i < col12; i++) {
+          		cout << str12[i] << " ";
+          	}
+          }
+     5. Самое частое слово
+          #include <iostream>
+          #include <map>
+          using namespace std;
+          
+          int main() {
+          	int n;
+          	cin >> n;
+          	map<string, int> counts;
+          	string s;
+          	int maxcount = 0;
+          	for (int i = 0; i < n; i++) {
+          		cin >> s;
+          		counts[s]++;
+          		if (counts[s] > maxcount) {
+          			maxcount = counts[s];
+          		}
+          	}
+          	for (auto& en : counts) {
+          		if (en.second == maxcount) {
+          			cout << en.first<<" ";
+          		}
+          	}
+          	return 0;
+          }
+     8. Уникальное число
+          package main
+          import "fmt"
+          func main() {
+           var n int
+           fmt.Scan(&n)
+           arr := make([]string,n)
+           var nums = map[string]int{}
+           for i := 0;i<n;i++{
+            fmt.Scan(&arr[i])
+            if val, ok := nums[arr[i]]; ok{
+             nums[arr[i]] = val+1
+            }else{
+             nums[arr[i]] = 1
+            }
+           }
+           for key, value := range nums{
+            if value%2==1{
+             fmt.Println(key)
+            }
+           }
+          }
+     9. Подходящая пара чисел
+          package main
+          import "fmt"
+          import "sort"
+          func main() {
+              var n int
+              var x int64
+              fmt.Scan(&n,&x)
+              arr := make([]int64 ,n)
+              for i :=0;i<n;i++{
+                  fmt.Scan(&arr[i])
+              }
+              sort.SliceStable(arr,func(i,j int)bool{
+                  return arr[i]<arr[j]
+              })
+              var i int =0 
+              n-=1
+              for true{
+                  if i==n{
+                      fmt.Println("0 0")
+                      break
+                  }else if(arr[i]+arr[n])==x{
+                      fmt.Println(arr[i],arr[n])
+                      break
+                  }else if(arr[i]+arr[n])<x{
+                      i+=1
+                  }else if(arr[i]+arr[n])>x{
+                      n-=1
+                  }
+              }
+          }
+
 
 
 
